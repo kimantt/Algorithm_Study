@@ -97,17 +97,17 @@ public class _LinkedList<E> implements Iterable<E> {
 	@Override
 	public Iterator<E> iterator() {
 		return new Iterator<E>() {
-			private int pointer = 0;
+			private Node<E> pointer = head;
 
 			@Override
 			public boolean hasNext() {
-				return pointer < size;
+				return pointer != null;
 			}
 
 			@Override
 			public E next() {
-				E e = get(pointer);
-				pointer++;
+				E e = pointer.data();
+				pointer = pointer.next();
 				return e;
 			}
 		};
@@ -130,7 +130,7 @@ public class _LinkedList<E> implements Iterable<E> {
 		
 		Node<E> link = head;
 		for (int i = 0; i < size; i++) {
-			if (link.data() == e) return i;
+			if (link.data().equals(e)) return i;
 			link = link.next();
 		}
 		
